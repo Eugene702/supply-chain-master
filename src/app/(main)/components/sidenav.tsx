@@ -13,7 +13,7 @@ const TruckFieldIcon = dynamic(() => import('@/assets/drawer/truckField'))
 
 const Sidenav = () => {
     const pathName = usePathname()
-    const isActiveParentMenu = (path: string) => pathName.startsWith(path)
+    const isActiveParentMenu = (path: string, mustMatch: boolean = false) => !mustMatch ? pathName.startsWith(path) : pathName === path
 
     return <div className="drawer-side">
         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
@@ -62,7 +62,7 @@ const Sidenav = () => {
                         <span>Pembelian</span>
                     </summary>
                     <ul>
-                        <li><Link href="/purchase" className={`linknav ${isActiveParentMenu('/purchase') ? 'active' : ''}`}>Daftar Pembelian</Link></li>
+                        <li><Link href="/purchase" className={`linknav ${isActiveParentMenu('/purchase', true) ? 'active' : ''}`}>Daftar Pembelian</Link></li>
                         <li><Link href="/purchase/report" className={`linknav ${isActiveParentMenu('/purchase/report') ? 'active' : ''}`}>Laporan</Link></li>
                     </ul>
                 </details>
@@ -70,7 +70,7 @@ const Sidenav = () => {
             <li>
                 <Link href="/supplier" className={`linknav ${isActiveParentMenu('/supplier') ? 'active' : ''}`}>
                     <TruckFieldIcon
-                        className="linknav-icon" />
+                        className={`linknav-icon ${isActiveParentMenu('/supplier') ? 'active' : ''}`} />
                     <span>Pemasok</span>
                 </Link>
             </li>
