@@ -6,15 +6,20 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  theme: {
-    extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+  plugins: [
+    require('daisyui'),
+    require('tailwind-scrollbar')({ nocompatible: true }),
+  ],
+
+  daisyui: {
+    themes: [
+      {
+        light: {
+          ...require("daisyui/src/theming/themes")["lofi"],
+          primary: "#4c1d95",
+        },
       },
-    },
+    ],
   },
-  plugins: [],
 };
 export default config;
