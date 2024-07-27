@@ -2,6 +2,9 @@
   "name": "supply_chain_master",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,9 +12,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^5.17.0",
+    "firebase": "^10.12.4",
+    "firebase-admin": "^12.3.0",
+    "formik": "^2.4.6",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "use-debounce": "^10.0.1",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.12",
@@ -20,10 +29,13 @@
     "daisyui": "^4.12.10",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
+    "fs": "^0.0.1-security",
+    "net": "^1.0.2",
     "postcss": "^8",
     "prisma": "^5.17.0",
     "tailwind-scrollbar": "^3.1.0",
     "tailwindcss": "^3.4.1",
+    "tls": "^0.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   }

@@ -10,6 +10,7 @@ const DashboardIcon = dynamic(() => import('@/assets/drawer/dashboard'))
 const WarehouseIcon = dynamic(() => import('@/assets/drawer/warehouse'))
 const BasketShoppingIcon = dynamic(() => import('@/assets/drawer/basketShopping'))
 const TruckFieldIcon = dynamic(() => import('@/assets/drawer/truckField'))
+const UserIcon = dynamic(() => import('@/assets/drawer/user'))
 
 const Sidenav = () => {
     const pathName = usePathname()
@@ -36,6 +37,23 @@ const Sidenav = () => {
                         className={`linknav-icon ${isActiveParentMenu('/dashboard') ? 'active' : ''}`} />
                     <span>Dashboard</span>
                 </Link>
+            </li>
+            <li>
+                <details open={isActiveParentMenu('/user')}>
+                    <summary className="linknav">
+                        <UserIcon
+                            className="linknav-icon" />
+                        <span>Pengguna</span>
+                    </summary>
+                    <ul>
+                        <li>
+                            <Link href="/user" className={`linknav ${isActiveParentMenu('/user', true) ? 'active' : ''}`}>Daftar Pengguna</Link>
+                        </li>
+                        <li>
+                            <Link href="/user/add" className={`linknav ${isActiveParentMenu('/user/add') ? 'active' : ''}`}>Tambah Pengguna</Link>
+                        </li>
+                    </ul>
+                </details>
             </li>
             <li>
                 <details open={isActiveParentMenu('/warehouse')}>

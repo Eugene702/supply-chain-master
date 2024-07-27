@@ -1,0 +1,29 @@
+[debug] [2024-07-27T02:42:28.489Z] ----------------------------------------------------------------------
+[debug] [2024-07-27T02:42:28.490Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Eugene-PC\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2024-07-27T02:42:28.491Z] CLI Version:   13.13.2
+[debug] [2024-07-27T02:42:28.491Z] Platform:      win32
+[debug] [2024-07-27T02:42:28.491Z] Node Version:  v18.18.0
+[debug] [2024-07-27T02:42:28.492Z] Time:          Sat Jul 27 2024 09:42:28 GMT+0700 (Waktu Indonesia Barat)
+[debug] [2024-07-27T02:42:28.492Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-07-27T02:42:28.495Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2024-07-27T02:42:28.522Z] > refreshing access token with scopes: []
+[debug] [2024-07-27T02:42:28.523Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-07-27T02:42:28.523Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-07-27T02:42:28.638Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-07-27T02:42:28.638Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-07-27T02:42:28.645Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-07-27T02:42:28.645Z] > authorizing via signed-in user (eugenefeilianputrarangga@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  E:\Coding\Web\supply_chain_master
+
+[debug] [2024-07-27T02:42:30.045Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2024-07-27T02:42:30.045Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
