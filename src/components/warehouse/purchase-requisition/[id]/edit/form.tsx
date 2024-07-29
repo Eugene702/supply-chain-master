@@ -1,9 +1,9 @@
 "use client"
 
-import { addData, getItem } from "@/app/(main)/warehouse/purchase-requisition/add/action";
+import { getItems, getData, updateData } from "@/app/(main)/warehouse/purchase-requisition/[id]/edit/action";
 import { FormikErrors, useFormik } from "formik";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { array, number, object, string } from "yup";
 
@@ -12,6 +12,7 @@ const XmarkIcon = dynamic(() => import("@/assets/drawer/xmark"));
 const AddIcon = dynamic(() => import("@/assets/drawer/add"));
 
 const Form = () => {
+    const params = useParams<{id: string}>()
     const router = useRouter()
     const [item, setItem] = useState<{ id: string; name: string }[]>([]);
     const schema = object().shape({
@@ -37,7 +38,7 @@ const Form = () => {
         validationSchema: schema,
         onSubmit: async e => {
             try{
-                await addData(e.form.map(item => ({ item: item.name, qty: item.qty })))
+                await updateData(params.id, e.form.map(item => ({ item: item.name, qty: item.qty })))
                 router.back()
             }catch{
                 alert('Ada kesalahan pada server!')
@@ -52,13 +53,26 @@ const Form = () => {
     useEffect(() => {
         const fetchItem = async () => {
             try{
-                const data = await getItem()
+                const data = await getItems()
                 setItem(data)
             }catch{
                 alert('Ada kesalahan pada server!')
             }
         };
 
+        const getDataRequest = async () => {
+            try{
+                const data = await getData(params.id)
+                console.log(data)
+                if(data){
+                    formik.setFieldValue("form", data.purchaseRequestItem.map(item => ({ name: item.idItem, qty: item.qty })))
+                }
+            }catch{ 
+                alert('Ada kesalahan pada server!')
+            }
+        }
+
+        getDataRequest();
         fetchItem();
     }, [])
 

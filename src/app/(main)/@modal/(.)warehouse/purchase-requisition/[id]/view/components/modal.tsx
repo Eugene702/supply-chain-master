@@ -3,6 +3,7 @@ import dynamic from "next/dynamic"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef } from "react"
 
+
 const Information = dynamic(() => import("@/components/warehouse/purchase-requisition/[id]/view/information"))
 const modal = () => {
     const ref = useRef<HTMLDialogElement>(null)

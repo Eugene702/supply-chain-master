@@ -7,6 +7,7 @@ export const getData = async (search: string) => {
     try{
         const data = await prisma.item.findMany({
             where: {
+                deletedAt: null,
                 name: {
                     contains: search ?? '',
                     mode: 'insensitive'
@@ -28,9 +29,12 @@ export const getData = async (search: string) => {
 
 export const deleteData = async (id: string) => {
     try{
-        await prisma.item.delete({
+        await prisma.item.update({
             where: {
                 id
+            },
+            data: {
+                deletedAt: new Date()
             }
         })
 

@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    env: {
+        COMPANY_NAME: process.env.COMPANY_NAME
+    },
     async redirects() {
         return [
             {

@@ -3,7 +3,7 @@ import dynamic from "next/dynamic"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef } from "react"
 
-const Form = dynamic(() => import('@/components/warehouse/purchase-requisition/form'))
+const Form = dynamic(() => import('@/components/warehouse/purchase-requisition/[id]/edit/form'))
 const Modal = () => {
     const router = useRouter()
     const ref = useRef<HTMLDialogElement>(null)

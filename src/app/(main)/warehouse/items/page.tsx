@@ -2,13 +2,13 @@ import { SearchParams } from "@/types/types"
 import { Metadata } from "next"
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
+import Wrapper from './components/wrapper'
 
 
 export const metadata: Metadata = {
     title: 'Daftar barang Gudang'
 }
 
-const Wrapper = dynamic(() => import('./components/wrapper'))
 const Loading = dynamic(() => import('@/components/loading'))
 
 const page = ({searchParams}: { searchParams: SearchParams }) => {

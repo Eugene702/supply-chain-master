@@ -1,7 +1,7 @@
 import { Metadata } from "next"
 import dynamic from "next/dynamic"
 
-const Form = dynamic(() => import('@/components/warehouse/purchase-requisition/form'))
+const Form = dynamic(() => import('@/components/warehouse/purchase-requisition/[id]/edit/form'))
 const BackButton = dynamic(() => import('@/components/backButton'))
 
 export const metadata: Metadata = {
