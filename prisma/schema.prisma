@@ -55,6 +55,7 @@ model Supplier{
   deletedAt DateTime?
 
   user User @relation(fields: [id], references: [id])
+  evidenceCashExpenditure EvidenceCashExpenditure[]
 }
 
 model Item{
@@ -128,6 +129,7 @@ model Invoices{
   user User @relation(fields: [idSupplier], references: [id])
   invoiceItem InvoiceItem[]
   purchase Purchase @relation(fields: [idPurchase], references: [id])
+  evidenceCashExpenditure EvidenceCashExpenditure?
 }
 
 model InvoiceItem{
@@ -145,7 +147,10 @@ model InvoiceItem{
 
 model EvidenceCashExpenditure{
   id String @id
-  idInvoice String
-  idUser String
+  idInvoice String @unique
+  idSupplier String
   createdAt DateTime @default(now())
+
+  supplier Supplier @relation(fields: [idSupplier], references: [id])
+  invoice Invoices @relation(fields: [idInvoice], references: [id])
 }
