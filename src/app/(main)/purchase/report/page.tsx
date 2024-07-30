@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import dynamic from "next/dynamic"
+import { Suspense } from "react"
 
 export const metadata: Metadata = {
     title: 'Laporan Pembelian',
@@ -7,8 +8,9 @@ export const metadata: Metadata = {
 
 const Filter = dynamic(() => import('./components/filter'))
 const Wrapper = dynamic(() => import('./components/wrapper'))
+const Loading = dynamic(() => import('@/components/loading'))
 
-const page = () => {
+const page = ({ searchParams }: { searchParams: { month: number, year: number } }) => {
     return <>
         <h1 className="text-4xl font-bold">Laporan Pembelian</h1>
 
@@ -17,7 +19,10 @@ const page = () => {
             <Filter />
 
             <div className="mt-10">
-                <Wrapper />
+                <Suspense key={`${searchParams.month}-${searchParams.year}`} fallback={<Loading />}>
+                    <Wrapper
+                        searchParams={searchParams} />
+                </Suspense>
             </div>
         </div>
     </>

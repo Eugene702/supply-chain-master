@@ -1,4 +1,7 @@
-const Information = () => {
+import { moment } from "@/utils/utils"
+import { GetDataPayload } from "../action"
+
+const Information = ({ data }: { data: GetDataPayload[] }) => {
     return <div>
         <h1 className="text-xl font-bold text-center">Laporan Pengeluaran Bulan Desember 2024</h1>
         <div className="divider"></div>
@@ -11,80 +14,12 @@ const Information = () => {
             </thead>
 
             <tbody>
-                <tr>
-                    <td>1 Desember 2021</td>
-                    <td>Rp 100.000</td>
-                </tr>
-
-                <tr>
-                    <td>2 Desember 2021</td>
-                    <td>Rp 200.000</td>
-                </tr>
-
-                <tr>
-                    <td>3 Desember 2021</td>
-                    <td>Rp 300.000</td>
-                </tr>
-
-                <tr>
-                    <td>4 Desember 2021</td>
-                    <td>Rp 400.000</td>
-                </tr>
-
-                <tr>
-                    <td>5 Desember 2021</td>
-                    <td>Rp 500.000</td>
-                </tr>
-
-                <tr>
-                    <td>6 Desember 2021</td>
-                    <td>Rp 600.000</td>
-                </tr>
-
-                <tr>
-                    <td>7 Desember 2021</td>
-                    <td>Rp 700.000</td>
-                </tr>
-
-                <tr>
-                    <td>8 Desember 2021</td>
-                    <td>Rp 800.000</td>
-                </tr>
-
-                <tr>
-                    <td>9 Desember 2021</td>
-                    <td>Rp 900.000</td>
-                </tr>
-
-                <tr>
-                    <td>10 Desember 2021</td>
-                    <td>Rp 1.000.000</td>
-                </tr>
-
-                <tr>
-                    <td>11 Desember 2021</td>
-                    <td>Rp 1.100.000</td>
-                </tr>
-
-                <tr>
-                    <td>12 Desember 2021</td>
-                    <td>Rp 1.200.000</td>
-                </tr>
-
-                <tr>
-                    <td>13 Desember 2021</td>
-                    <td>Rp 1.300.000</td>
-                </tr>
-
-                <tr>
-                    <td>14 Desember 2021</td>
-                    <td>Rp 1.400.000</td>
-                </tr>
-
-                <tr>
-                    <td>15 Desember 2021</td>
-                    <td>Rp 1.500.</td>
-                </tr>
+                {
+                    data.map((e, index) => <tr key={index}>
+                        <td>{ moment(e.createdAt.toUTCString()) }</td>
+                        <td>{ e.invoiceItem.map(a => a.price * a.qty).reduce((a, b) => a+ b, 0) }</td>
+                    </tr>)
+                }
             </tbody>
         </table>
     </div>
