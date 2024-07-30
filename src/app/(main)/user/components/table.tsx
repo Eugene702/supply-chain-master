@@ -30,7 +30,7 @@ const Table = ({
             <tbody>
                 {
                     data.map((e, index) => <tr key={index}>
-                        <td>{ e.profile?.name }</td>
+                        <td>{ e.role == "SUPPLIER" ? e.supplier?.name : e.profile?.name }</td>
                         <td>{ e.email }</td>
                         <td>{ generateRoleToString(e.role) }</td>
                         <td>

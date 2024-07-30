@@ -28,13 +28,13 @@ const Form = () => {
             try{
                 const check = await checkEmail(e.email)
                 if(check){
-                    const {user} = await createUserWithEmailAndPassword(auth, e.email, e.password)
-                    await addUser(user.uid, e.name, e.email, e.role)
+                    await addUser(e.name, e.email, e.role)
                     router.push("/user")
                 }else{
                     setFieldError('email', 'Email sudah digunakan!')
                 }
-            }catch{
+            }catch(e){
+                console.log(e)
                 alert('Ada kesalahan pada server!')
             }
         }

@@ -1,41 +1,30 @@
-const Information = () => {
-    return <div>
-        <h1 className="text-xl font-bold text-center">PT. MAJU MUNDUR</h1>
-        <div className="divider"></div>
-        <h2 className="text-lg text-center">FAKTUR</h2>
+"use client"
 
-        <p>No Faktur : F001</p>
-        <p>Tgl. Faktur : 28 Januari 2025</p>
-        <p>No. Pesanan : SP001</p>
-        <p>Nama Pelanggan : PT. MAJU MUNDUR</p>
+import { GetDataPayload } from "@/app/(main)/purchase/[id]/invoices/action"
+import Letter from './letter'
+import dynamic from "next/dynamic"
+import { useRef } from "react"
+import { useReactToPrint } from "react-to-print"
 
-        <table className="table mt-5 table-lg">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Barang</th>
-                    <th>Satuan</th>
-                    <th>Jumlah Kirim</th>
-                    <th>Harga Satuan</th>
-                    <th>Harga Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Hardisk</td>
-                    <td>Unit</td>
-                    <td>8</td>
-                    <td>150.000</td>
-                    <td>1.200.000</td>
-                </tr>
-                <tr>
-                    <td colSpan={5}>Total Bayar</td>
-                    <td>1.200.000</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+const PrintIcon = dynamic(() => import('@/assets/drawer/print'))
+
+const Information = ({ data }: { data: GetDataPayload }) => {
+    const ref = useRef<HTMLDivElement>(null)
+    const handlePrint = useReactToPrint({
+        content: () => ref.current
+    })
+
+    return <>
+        <div className="flex justify-between items-center">
+            <button className="btn btn-circle rounded-full" onClick={handlePrint}>
+                <PrintIcon className="w-6 fill-gray-400" />
+            </button>
+
+            <button className="btn">Selesaikan pembayaran</button>
+        </div>
+
+        <Letter data={data} ref={ref} />
+    </>
 }
 
 export default Information

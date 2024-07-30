@@ -2,6 +2,7 @@
 
 import { $Enums } from "@prisma/client"
 import prisma from "../../../../../prisma/database"
+import { revalidatePath } from "next/cache"
 
 export const checkEmail = async (email: string) => {
     try{
@@ -17,21 +18,29 @@ export const checkEmail = async (email: string) => {
     }
 }
 
-export const addUser = async (uid: string, name: string, email: string, role: string) => {
+export const addUser = async (name: string, email: string, role: string) => {
     try{
         const user = await prisma.user.create({
             data: {
-                id: uid,
                 email,
                 role: role as $Enums.Role,
-                profile: {
+                profile: role != $Enums.Role.SUPPLIER ? {
                     create: {
                         name
                     }
-                }
+                } : undefined,
+                supplier: role == $Enums.Role.SUPPLIER ? {
+                    create: {
+                        name: name,
+                        address: '',
+                    }
+                } : undefined
             }
         })
-    }catch{
+
+        revalidatePath("/", "layout")
+    }catch(e){
+        console.log(e)
         throw new Error('Ada kesalahan pada server!')
     }
 }

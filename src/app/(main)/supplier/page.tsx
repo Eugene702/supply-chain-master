@@ -1,14 +1,17 @@
+import { SearchParams } from "@/types/types"
 import { Metadata } from "next"
 import dynamic from "next/dynamic"
+import { Suspense } from "react"
+import Wrapper from './components/wrapper'
 
 export const metadata: Metadata = {
     title: 'Pemasok'
 }
 
-const Wrapper = dynamic(() => import('./components/wrapper'))
 const SearchForm = dynamic(() => import('@/components/searchForm'))
+const Loading = dynamic(() => import('@/components/loading'))
 
-const page = () => {
+const page = ({searchParams}: { searchParams: SearchParams }) => {
     return <>
         <h1 className="text-4xl font-bold">Pemasok</h1>
 
@@ -16,7 +19,11 @@ const page = () => {
             <div className="max-w-xs mb-5">
                 <SearchForm />
             </div>
-            <Wrapper />
+
+            <Suspense fallback={<Loading />} key={searchParams.search}>
+                <Wrapper
+                    searchParams={searchParams} />
+            </Suspense>
         </div>
     </>
 }

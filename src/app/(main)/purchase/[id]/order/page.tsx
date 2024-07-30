@@ -1,24 +1,26 @@
 import { Metadata } from "next"
 import dynamic from "next/dynamic"
-import Wrapper from '@/components/purchase/[id]/invoices/wrapper'
 import { Suspense } from "react"
-
-export const metadata: Metadata = {
-    title: 'Faktur Pembelian',
-}
+import Wrapper from './components/wrapper'
 
 const BackButton = dynamic(() => import('@/components/backButton'))
 const Loading = dynamic(() => import('@/components/loading'))
 
-const page = ({ params }: { params: { id: string } }) => {
-    return <>
-        <h1 className="text-4xl font-bold">Faktur Pembelian</h1>
+export const metadata: Metadata = {
+    title: 'Surat Pemesanan'
+}
 
-        <div className="mt-10">
+const page = ({ params }: { params: {id: string} }) => {
+    return <>
+        <h1 className="text-4xl font-bold">Surat Pemesanan</h1>
+
+        <div className="mt-5">
             <BackButton />
-            <div className="mt-5 bg-white p-6 rounded-xl">
+
+            <div className="mt-10 bg-white p-6 rounded-xl">
                 <Suspense fallback={<Loading />}>
-                    <Wrapper id={params.id} />
+                    <Wrapper
+                        id={params.id} />
                 </Suspense>
             </div>
         </div>

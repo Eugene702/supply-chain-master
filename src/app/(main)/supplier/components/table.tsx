@@ -1,6 +1,8 @@
+import { generateStatusToString, moment } from "@/utils/utils"
+import { Purchase } from "@prisma/client"
 import Link from "next/link"
 
-const Table = () => {
+const Table = ({ data }: { data: Purchase[] }) => {
     return <table className="table table-zebra table-lg">
         <thead>
             <tr>
@@ -12,14 +14,16 @@ const Table = () => {
         </thead>
 
         <tbody>
-            <tr>
-                <td>SP001</td>
-                <td>Menunggu</td>
-                <td>28 Januari 2024</td>
-                <td>
-                    <Link href="/supplier/28" className="btn">Lihat pesanan</Link>
-                </td>
-            </tr>
+            {
+                data.map((e, index) => <tr key={index}>
+                    <td>{ e.id }</td>
+                    <td>{ generateStatusToString(e.status) }</td>
+                    <td>{ moment(e.createdAt.toUTCString()) }</td>
+                    <td>
+                        <Link href={`/supplier/${e.id}`} className="btn">Lihat pesanan</Link>
+                    </td>
+                </tr>)
+            }
         </tbody>
     </table>
 }

@@ -1,6 +1,8 @@
+import { moment } from "@/utils/utils"
+import { PurchaseRequest } from "@prisma/client"
 import Link from "next/link"
 
-const Table = () => {
+const Table = ({ data }: { data: PurchaseRequest[] }) => {
     return <table className="table table-zebra table-lg">
         <thead>
             <tr>
@@ -11,11 +13,13 @@ const Table = () => {
         </thead>
 
         <tbody>
-            <tr>
-                <td>FP001</td>
-                <td>28 Maret 2024</td>
-                <td><Link href="/purchase/request/fp001" className="btn btn-ghost">Lihat permintaan</Link></td>
-            </tr>
+            {
+                data.map((e, index) => <tr key={index}>
+                    <td>{ e.id }</td>
+                    <td>{ moment(e.createdAt.toUTCString()) }</td>
+                    <td><Link href={`/purchase/request/${e.id}`} className="btn btn-ghost">Lihat permintaan</Link></td>
+                </tr>)
+            }
         </tbody>
     </table>
 }

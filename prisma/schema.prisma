@@ -34,6 +34,8 @@ model User{
 
   profile Profile?
   supplier Supplier?
+  purchase Purchase[]
+  invoices Invoices[]
 }
 
 model Profile{
@@ -85,23 +87,65 @@ model PurchaseRequestItem{
 
   item Item @relation(fields: [idItem], references: [id])
   purchaseRequest PurchaseRequest @relation(fields: [idPurchaseRequest], references: [id])
+  purchaseItem PurchaseItem[]
 }
 
 model Purchase{
   id String @id 
   idSupplier String
-  idPurchaseRequestItem String
   status Status
+  month Int
+  year Int
   createdAt DateTime @default(now())
   deletedAt DateTime?
+
+  user User @relation(fields: [idSupplier], references: [id])
+  purchaseItem PurchaseItem[]
+  invoices Invoices?
+}
+
+model PurchaseItem{
+  id String @id @default(cuid())
+  idPurchase String
+  idPurchaseRequestItem String 
+  createdAt DateTime @default(now())
+  deletedAt DateTime?
+
+  purchase Purchase @relation(fields: [idPurchase], references: [id])
+  purchaseRequestItem PurchaseRequestItem @relation(fields: [idPurchaseRequestItem], references: [id])
+  invoiceItem InvoiceItem[]
 }
 
 model Invoices{
   id String @id
-  idPurchase String
+  idPurchase String @unique
   idSupplier String
+  month Int
+  year Int
+  createdAt DateTime @default(now())
+  deletedAt DateTime?
+
+  user User @relation(fields: [idSupplier], references: [id])
+  invoiceItem InvoiceItem[]
+  purchase Purchase @relation(fields: [idPurchase], references: [id])
+}
+
+model InvoiceItem{
+  id String @id @default(cuid())
+  idInvoice String
+  idPurchaseItem String
   qty Int
   price Int
   createdAt DateTime @default(now())
   deletedAt DateTime?
+
+  invoice Invoices @relation(fields: [idInvoice], references: [id])
+  purchaseItem PurchaseItem @relation(fields: [idPurchaseItem], references: [id])
+}
+
+model EvidenceCashExpenditure{
+  id String @id
+  idInvoice String
+  idUser String
+  createdAt DateTime @default(now())
 }

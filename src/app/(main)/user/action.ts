@@ -12,6 +12,11 @@ export type GetDataPayload = Prisma.UserGetPayload<{
             select: {
                 name: true,
             }
+        },
+        supplier: {
+            select: {
+                name: true
+            }
         }
     }
 }>
@@ -19,16 +24,30 @@ export const getData = async(search: string) => {
     try{
         const user = await prisma.user.findMany({
             where: {
-                profile: {
-                    name: {
-                        contains: search ?? '',
-                        mode: 'insensitive'
+                OR: [
+                    {
+                        email: {
+                            contains: search,
+                            mode: 'insensitive'
+                        }
+                    },
+                    {
+                        profile: {
+                            name: {
+                                contains: search,
+                                mode: 'insensitive'
+                            }
+                        }
+                    },
+                    {
+                        supplier: {
+                            name: {
+                                contains: search,
+                                mode: 'insensitive'
+                            }
+                        }
                     }
-                },
-                email: {
-                    contains: search ?? '',
-                    mode: 'insensitive'
-                }
+                ]
             },
             select: {
                 id: true,
@@ -37,6 +56,11 @@ export const getData = async(search: string) => {
                 profile: {
                     select: {
                         name: true,
+                    }
+                },
+                supplier: {
+                    select: {
+                        name: true
                     }
                 }
             }
